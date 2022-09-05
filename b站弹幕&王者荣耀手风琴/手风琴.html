@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./less/minireset.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        ul {
+            display: flex;
+        }
+
+        ul li{
+            margin-left: 10px;
+        }
+        
+        ul li a{
+            display: block;
+            position: relative;
+            width: 69px;
+            height: 69px;
+        }
+
+        ul li:nth-child(1) a{
+            width: 224px;
+        }
+        
+        ul li a img{
+            width: 69px;
+            height: 69px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 5px;
+        }
+
+        ul li a img.big{
+            display: none;
+            width: 224px;
+            height: 69px;
+        }
+
+        ul li:nth-child(1) a .big{
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="">
+                <img src="./img/126.webp" alt="" class="small">
+                <img src="./img/126-freehover.png" alt="" class="big">
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="./img/127.webp" alt="" class="small">
+                <img src="./img/127-freehover.png" alt="" class="big">
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="./img/131.webp" alt="" class="small">
+                <img src="./img/131-freehover.png" alt="" class="big">
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="./img/173.webp" alt="" class="small">
+                <img src="./img/173-freehover.png" alt="" class="big">
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="./img/507.webp" alt="" class="small">
+                <img src="./img/507-freehover.png" alt="" class="big">
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="./img/525.webp" alt="" class="small">
+                <img src="./img/525-freehover.png" alt="" class="big">
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="./img/531.webp" alt="" class="small">
+                <img src="./img/531-freehover.png" alt="" class="big">
+            </a>
+        </li>
+    </ul>
+
+    <script>
+        $("li").mousemove(function () {
+            $(this).find("a").css({"width":224}).find(".big").css({"display":"block"}).end().end().siblings().find("a").css({"width":69}).find(".big").css({"display":"none"})
+        })
+    </script>
+</body>
+
+</html>

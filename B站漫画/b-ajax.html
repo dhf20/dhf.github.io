@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="never">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        li {
+            list-style: none;
+            margin: 10px;
+        }
+
+        .styleId {
+            display: flex;
+        }
+
+        .isFinish {
+            display: flex;
+        }
+
+        .areaId {
+            display: flex;
+        }
+
+        .order {
+            display: flex;
+        }
+
+        .styleId div {
+            margin: 10px;
+        }
+
+        .box {
+            display: flex;
+            flex-wrap: wrap
+        }
+        .box .image{
+            display: flex;
+            flex-direction: column
+        }
+
+        .box img {
+            width: 180px;
+            height: 240px;
+        }
+
+        .box span {
+            display: flex;
+        }
+
+        .active {
+            color: blue;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- styleId 题材分类id number -1全部  999热血   997古风  1016玄幻 998奇幻 1023悬疑 1002都市 1096历史 1092武侠仙侠  1088游戏竞技  1081悬疑灵异 1063架空 1060青春 1054西幻 1048现代 1028正能量 1015科幻
+areaId 地区分类id  number -1全部  1大陆  2日本  6韩国  5其他
+isFinish 进度分类    number -1全部  0连载  1完结
+order  排序                  number 0人气推荐 1更新时间 2追漫人数  3上架时间
+pageNum  页码          number 1 -->
+
+    <!-- allow_wait_free: false
+discount_type: 0
+horizontal_cover: "http://i0.hdslb.com/bfs/manga-static/78876fdef412fa995ae5cce7cc30af1ff61f4ac7.png"
+is_finish: 1
+last_ord: 208
+last_short_title: "206"
+release_time: ""
+season_id: 25717
+square_cover: "http://i0.hdslb.com/bfs/manga-static/68a5c694e59b37f58c03530226a24a66933adb3a.png"
+status: 0
+title: "鬼灭之刃"
+total: 208
+type: 0
+vertical_cover: "https://i0.hdslb.com/bfs/manga-static/8b843504867408d80c3a75fa2bb7132212379320.jpg" -->
+
+    <div class="styleId">
+        <div>题材分类</div>
+    </div>
+    <div class="areaId"></div>
+    <div class="isFinish"></div>
+    <div class="order"></div>
+    <div class="box">
+        <div class="image"></div>
+    </div>
+
+    <script>
+        var query = {
+            styleId: -1,
+            areaId: -1,
+            isFinish: -1,
+            order: 0
+        }
+
+        function give() {
+            $.get("https://apis.netstart.cn/bcomic/ClassPage?", query, function (res) {
+                // console.log(res.data);
+                $(".box").html(" ")
+                res.data.forEach(function (ele) {
+                    // console.log(ele);
+                    $(".box").append('<img src="' + ele.vertical_cover + '">')
+                    // $(".box").append('<span>'+ele.title+'</span>')
+                });
+            })
+        }
+        give()
+
+        var styleId = [
+            { text: "全部", id: -1 },
+            { text: "热血", id: 999 },
+            { text: "古风", id: 997 },
+            { text: "玄幻", id: 1016 },
+            { text: "奇幻", id: 998 },
+            { text: "悬疑", id: 1023 },
+            { text: "都市", id: 1002 },
+            { text: "历史", id: 1096 },
+            { text: "武侠仙侠", id: 1092 },
+            { text: "游戏竞争", id: 1088 },
+            { text: "悬疑灵异", id: 1081 },
+            { text: "架空", id: 1063 },
+            { text: "青春", id: 1060 },
+            { text: "西幻", id: 1054 },
+            { text: "现代", id: 1048 },
+            { text: "正能量", id: 1028 },
+            { text: "科幻", id: 1015 },
+        ]
+
+        var areaId = [
+            { text: "全部", id: -1 },
+            { text: "大陆", id: 1 },
+            { text: "日本", id: 2 },
+            { text: "韩国", id: 6 },
+            { text: "其他", id: 5 },
+        ]
+
+        var isFinish = [
+            { text: "全部", id: -1 },
+            { text: "连载", id: 0 },
+            { text: "完结", id: 1 },
+        ]
+
+        var order = [
+            { text: "人气推荐", id: 0 },
+            { text: "更新时间", id: 1 },
+            { text: "追漫人数", id: 2 },
+            { text: "上架时间", id: 3 },
+
+        ]
+
+        styleId.forEach(function (ele) {
+            // console.log(ele);
+            $(".styleId").append('<li data-id=' + ele.id + '>' + ele.text + '</li>')
+        });
+
+        $(".styleId li").on("click", function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            query.styleId = $(this).data("id");
+            give();
+        })
+        areaId.forEach(function (ele) {
+            // console.log(ele);
+            $(".areaId").append('<li data-id=' + ele.id + '>' + ele.text + '</li>')
+        });
+
+        $(".areaId li").on("click", function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            query.areaId = $(this).data("id");
+            give();
+        })
+        isFinish.forEach(function (ele) {
+            // console.log(ele);
+            $(".isFinish").append('<li data-id=' + ele.id + '>' + ele.text + '</li>')
+        });
+
+        $(".isFinish li").on("click", function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            query.isFinish = $(this).data("id");
+            give();
+        })
+        order.forEach(function (ele) {
+            // console.log(ele);
+            $(".order").append('<li data-id=' + ele.id + '>' + ele.text + '</li>')
+        });
+
+        $(".order li").on("click", function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            query.order = $(this).data("id");
+            give();
+        })
+
+    </script>
+
+</body>
+
+</html>

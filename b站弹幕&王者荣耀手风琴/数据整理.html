@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 有如下数组
+    var citys = [
+      { id: 1, nm: "北京", py: "beijing" },
+      { id: 45, nm: "重庆", py: "chongqing" },
+      { id: 59, nm: "成都", py: "chengdu" },
+      { id: 70, nm: "长沙", py: "changsha" },
+      { id: 84, nm: "保定", py: "baoding" },
+      { id: 88, nm: "蚌埠", py: "bengbu" },
+      { id: 89, nm: "常州", py: "changzhou" },
+      { id: 150, nm: "阿拉善盟", py: "alashanmeng" },
+      { id: 151, nm: "鞍山", py: "anshan" },
+      { id: 197, nm: "安庆", py: "anqing" },
+      { id: 238, nm: "安阳", py: "anyang" },
+      { id: 700, nm: "承德县", py: "chengdexian" },
+      { id: 700, nm: "承德县", py: "dhengdexian" },
+    ];
+
+    function parseCity(arr) {
+      var nums = {}
+      var citys = []
+      var word = "ABCDEFGHJKLMNOPQRSTWXYZ".split("")
+      for (let i = 0; i < arr.length; i++) {
+        var city = arr[i];
+        var letter = city.py.charAt(0).toUpperCase()
+        // console.log(city, letter);
+        if (nums[letter]) {
+          nums[letter].push(city);
+        } else {
+          nums[letter] = [city];
+        }
+      }
+      // return nums;
+      
+
+      var n = []
+      var snew = []
+      var s = {}
+
+      // console.log(nums);
+      for (let i = 0; i < word.length; i++) {
+        // console.log(nums[word[i]]);
+        n.push(nums[word[i]])
+      };
+      // console.log(n);
+      var newword = []
+      var worda = {}
+      worda.letter = word[0]
+      worda.citys = n[0];
+      var wordb = {}
+      wordb.letter = word[1]
+      wordb.citys = n[1];
+      var wordc = {}
+      wordc.letter = word[2]
+      wordc.citys = n[2];
+      newword.push(worda)
+      newword.push(wordb)
+      newword.push(wordc)
+      return newword
+    }
+
+    var a = parseCity(citys)
+    console.log(a);
+    // var n = []
+    // var snew = []
+    // var s = {}
+    // var word = ["A", "B", "C"]
+    // word.forEach(function (eles, is) {
+    //   // console.log(a[eles],is);
+    //   n.push(a[eles]);
+    //   s.letter = eles;
+    //   s.citys = n;
+    // })
+    // for (let i = 0; i < word.length; i++) {
+    //   console.log(a[word[i]]);
+    //   n.push(a[word[i]])
+    // };
+
+    // var j = 0;
+    // if (j < word.length) {
+    //   s.letter = word[j]
+    //   s.citys = n[j]
+    //   console.log(s);
+    //   snew.push(s)
+    //   j++;
+    // }
+    // console.log(snew);
+    // a["A"].forEach(function(ele,i){
+    //   n.push(ele);
+    // });
+    // console.log(n);
+    // s.letter = "A"
+    // s.citys = n
+    // console.log("s",s);
+    // console.log(a["A"]);
+
+
+    //   变成如下结构
+    var parsedCitys = [
+      {
+        letter: "A",
+        citys: [
+          { id: 150, nm: "阿拉善盟", py: "alashanmeng" },
+          { id: 151, nm: "鞍山", py: "anshan" },
+          { id: 197, nm: "安庆", py: "anqing" },
+          { id: 238, nm: "安阳", py: "anyang" },
+        ],
+      },
+      {
+        letter: "B",
+        citys: [
+          { id: 1, nm: "北京", py: "beijing" },
+          { id: 84, nm: "保定", py: "baoding" },
+          { id: 88, nm: "蚌埠", py: "bengbu" },
+        ],
+      },
+      {
+        letter: "C",
+        citys: [
+          { id: 45, nm: "重庆", py: "chongqing" },
+          { id: 59, nm: "成都", py: "chengdu" },
+          { id: 70, nm: "长沙", py: "changsha" },
+          { id: 89, nm: "常州", py: "changzhou" },
+          { id: 700, nm: "承德县", py: "chengdexian" },
+        ],
+      },
+    ];
+
+  </script>
+
+  <script>
+      // 手风琴
+      // https://pvp.qq.com/web201605/herolist.shtml
+  </script>
+</body>
+
+</html>
