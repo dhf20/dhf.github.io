@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        li {
+            list-style: none;
+        }
+
+        .bigbox {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bigbox div {
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bigbox div div {
+            display: flex;
+            border: 1px solid black;
+        }
+
+        .active {
+            color: blue;
+        }
+
+        .h {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bigbox">
+        <div class="sheng">
+            <div>省份</div>
+        </div>
+        <div class="shi">
+            <div>市</div>
+        </div>
+        <div class="chen">
+            <div>城区</div>
+        </div>
+    </div>
+    <script>
+        function getnum(num, chen, chennum, c, word) {
+            for (let i = 0; i < num.length; i++) {
+                if (num[i].join("").length == word) {
+                    chen.push(city[i][0].split(":")[1])
+                    chennum.push(num[i].join(""))
+                }
+            }
+            for (let i = 0; i < chen.length; i++) {
+                c.push({})
+            }
+            for (let i = 0; i < c.length; i++) {
+                c[i].id = chennum[i]
+                c[i].city = chen[i]
+            }
+            return c
+        }
+        var sheng = [], shi = [], chen = [], shengnum = [], shinum = [], chennum = [], shengc = [], shic = [], chenc = [], num = [], city = []
+        $.get({
+            url: "./prov-county.json", success: function (e) {
+                console.log(e);
+                e.forEach(function (ele, i) {
+                    var res = /\:\S*/g
+                    var resnum = /\d/g
+                    city.push(ele.match(res))
+                    num.push(ele.match(resnum))
+                });
+                var two = getnum(num, sheng, shengnum, shengc, 2)
+                var six = getnum(num, chen, chennum, chenc, 6)
+                var four = getnum(num, shi, shinum, shic, 4)
+                $(".sheng div").click(function () {
+                    $(".sheng li").toggle()
+                    $(".shi li").html(" ")
+                    $(".chen li").html(" ")
+                })
+                two.forEach(function (ele, i) {
+                    $(".sheng").append('<li data-id=' + two[i].id + '>' + two[i].city + '</li>')
+                });
+                $(".sheng li").on("click", function () {
+                    $(".shi li").html(" ")
+                    $(".chen li").html(" ")
+                    $(this).css({ "color": "blue" }).siblings().css({ "color": "black" })
+                    d = $(this).data("id")
+                    four.forEach(function (ele, i) {
+                        if (d == ele.id.slice(0, 2)) {
+                            $(".shi").append('<li data-id=' + ele.id + '>' + ele.city + '</li>')
+                        }
+                    });
+                    $(".shi li").on("click", function () {
+                        $(".chen li").html(" ")
+                        $(this).css({ "color": "blue" }).siblings().css({ "color": "black" })
+                        a = $(this).data("id")
+                        six.forEach(function (ele, i) {
+                            if (a == ele.id.slice(0, 4)) {
+                                $(".chen").append('<li data-id=' + ele.id + '>' + ele.city + '</li>')
+                            }
+                        })
+                        $(".chen li").on("click", function () {
+                            $(this).css({ "color": "blue" }).siblings().css({ "color": "black" })
+                        })
+                    }
+                    )
+                })
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

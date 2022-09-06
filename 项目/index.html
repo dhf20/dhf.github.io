@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./less/minireset.css">
+    <link rel="stylesheet" href="./less/index.css">
+</head>
+
+<body>
+    <section>
+        <ul class="top"></ul>
+        <ul class="bottom"></ul>
+    </section>
+
+    <script>
+        var tops = [
+            { id: 0, text: "全部" },
+            { id: 1, text: "HTML&CSS" },
+            { id: 2, text: "JavaScript" },
+            { id: 3, text: "bootstrap" },
+            { id: 4, text: "jQuery" },
+            { id: 5, text: "html5&css3" }
+        ]
+
+        var numbers = [
+            {
+                id: 1,
+                htt: "./整形静态页面/doctor.html",
+                text: "整形静态页面",
+                img: "./img/整形静态页面.png"
+            },
+            {
+                id: 1,
+                htt: "./儿童静态页面/kiddy.html",
+                text: "儿童静态页面",
+                img: "./img/儿童静态页面.png"
+            },
+            {
+                id: 1,
+                htt: "./同城静态页面/排版.html",
+                text: "同城静态页面",
+                img: "./img/同城静态页面.png"
+            },
+            {
+                id: 2,
+                htt: "./九宫格抽奖/test.html",
+                text: "九宫格抽奖",
+                img: "./img/九宫格抽奖.gif"
+            },
+            {
+                id: 3,
+                htt: "./服装响应式页面/dress.html",
+                text: "服装响应式页面",
+                img: "./img/服装响应式页面.png"
+            },
+            {
+                id: 3,
+                htt: "./整形响应式页面/整形.html",
+                text: "整形响应式页面",
+                img: "./img/整形静态页面.png"
+            },
+            {
+                id: 4,
+                htt: "./b站弹幕&王者荣耀手风琴/b站-test.html",
+                text: "b站弹幕",
+                img: "./img/b站弹幕.gif"
+            },
+            {
+                id: 4,
+                htt: "./B站漫画/b-ajax.html",
+                text: "B站漫画",
+                img: "./img/b站漫画.png"
+            },
+            {
+                id: 4,
+                htt: "./b站弹幕&王者荣耀手风琴/手风琴.html",
+                text: "王者荣耀手风琴",
+                img: "./img/王者荣耀手风琴.gif"
+            },
+        ]
+
+        $(".top").append(`${tops.map(function (ele) {
+            return `
+            <li data-id="${ele.id}">
+                <h3>${ele.text}</h3>
+                </li>`
+        }).join("")}`)
+
+        function qunbu() {
+            $(".bottom").append(`${numbers.map(function (ele) {
+                // console.log(ele);
+                return `
+            <li>
+                <a href="${ele.htt}">
+                <div class="big">
+                    <img src="${ele.img}">
+                    <div class="mask">
+                        <h1>${ele.text}</h1>
+                        </div>
+                    </div>
+                    
+                </a>
+                <h3>${ele.text}</h3>
+                </li>
+                `
+            }).join("")}`)
+        }
+        qunbu()
+
+        $(".top li").on("click", function () {
+            $(".bottom").html(" ")
+            // console.log($(this).data("id"));
+            var _this = $(this).data("id")
+            if (_this == 0) {
+                qunbu()
+            }
+            numbers.map(function (ele) {
+
+                if (_this == ele.id) {
+                    // console.log(ele);
+                    $(".bottom").append(`
+                    <li>
+                <a href="${ele.htt}">
+                <div class="big">
+                    <img src="${ele.img}">
+                    <div class="mask">
+                        <h1>${ele.text}</h1>
+                        </div>
+                    </div>
+                    
+                </a>
+                <h3>${ele.text}</h3>
+                </li>
+                    `)
+                }
+            })
+        })
+
+        // $(".bottom li .big").mouseover(function () {
+        //     console.log(this);
+
+        //     // this.$(".mask").css({"background-color":"red"});
+        //     $(".mask").css({"background-color":"red"});
+        // })
+    </script>
+</body>
+
+</html>
