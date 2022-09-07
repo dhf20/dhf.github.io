@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./minireset.css">
+    <link rel="stylesheet" href="./轮播图练习2.css">
+</head>
+
+<body>
+    <div class="bigbox">
+        <div id="warpper" class="warpper">
+            <div class="imgs">
+                <img src="./image/b1.jpg" alt="">
+                <img src="./image/b2.jpg" alt="">
+                <img src="./image/b3.jpg" alt="">
+                <img src="./image/b4.jpg" alt="">
+            </div>
+            <div class="dots">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </div>
+            <div class="logo">
+                <li><</li>
+                <li>></li>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var num ;
+        var imgEl = document.getElementById("warpper")
+        var imgs = imgEl.getElementsByClassName("imgs")[0].getElementsByTagName("img")
+        var dots = imgEl.getElementsByClassName("dots")[0].getElementsByTagName("li")
+        var logoLeft = imgEl.getElementsByClassName("logo")[0].getElementsByTagName("li")[0]
+        var logoRight = imgEl.getElementsByClassName("logo")[0].getElementsByTagName("li")[1]
+
+        num = showtime(0)
+
+        function showtime(n) {
+            for (let i = 0; i < imgs.length; i++) {
+                if (i === n) {
+                    imgs[i].style.opacity = 1;
+                    dots[i].style.background = "red";
+
+                } else {
+                    imgs[i].style.opacity = 0;
+                    dots[i].style.background = "orange";
+                }
+            }
+            return n
+        }
+
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].title = i
+            dots[i].onclick = function () {
+                
+                num = showtime(Number(this.title))
+            }
+
+        }
+
+        logoLeft.onclick = function () {
+            num--
+            if (num < 0) {
+                num = imgs.length-1
+            }
+            showtime(num)
+        }
+
+        function logorighttime() {
+            num++
+            if (num > imgs.length-1) {
+                num = 0
+            }
+            showtime(num)
+        }
+
+        logoRight.onclick = function () {
+            logorighttime()
+        }
+
+        setInterval(logorighttime,3000)
+    </script>
+</body>
+
+</html>

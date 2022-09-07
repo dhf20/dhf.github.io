@@ -1,0 +1,59 @@
+.bigbox {
+    .warpper {
+        width: 400px;
+        background-color: red;
+        margin: 0 auto;
+        position: relative;
+        .imgs {
+            position: relative;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                display: block;
+                transition: all 0.5s;
+            }
+
+            :first-child {
+                position: relative;
+            }
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            position: absolute;
+            li {
+                width: 20px;
+                height: 20px;
+                background-color: orange;
+                border-radius: 50%;
+                list-style: none;
+                margin: 0 10px;
+                
+                
+            }
+        }
+        .logo{
+            display: flex;
+            position: absolute;
+            justify-content: space-between;
+            left: 0;
+            top: calc(50% - 20px);
+            list-style: none;
+            width: 100%;
+            font-size: 40px;
+            color: white;
+            .left{
+                li{
+                    
+                }
+            }
+        }
+    }
+}

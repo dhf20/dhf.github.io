@@ -8,6 +8,7 @@
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="./swiper-bundle.min.css" />
     <link rel="stylesheet" href="./360.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Demo styles -->
     <style>
@@ -312,6 +313,17 @@
                 clickable: true,
             },
         });
+
+        // $(".card").on("scroll", function () {
+        //     console.log(1);
+        // })
+
+        $('.swiper-slide').find('.card').fadeOut()
+        $('.swiper-slide').eq(swiper.activeIndex).find('.card').fadeIn(1500)
+        document.body.addEventListener('mousewheel', function () {
+            $('.swiper-slide').eq(swiper.activeIndex).find('.card').fadeIn(1500)
+            $('.swiper-slide').eq(swiper.activeIndex).siblings().find('.card').fadeOut()
+        })
     </script>
 </body>
 

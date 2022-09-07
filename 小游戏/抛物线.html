@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .stage {
+            width: 500px;
+            height: 500px;
+            background-color: lightblue;
+            position: relative;
+        }
+
+        .stage i {
+            display: block;
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage"></div>
+
+    <script>
+        var stage = document.querySelector(".stage");
+
+        function Dot(color, size, x, y, xspeed, yspeed) {
+            this.color = color;
+            this.size = size;
+            this.x = x;
+            this.y = y;
+            this.xspeed = xspeed;
+            this.yspeed = yspeed;
+        }
+
+        Dot.prototype.update = function () {
+            this.node.style.left = this.x + "px";
+            this.node.style.top = this.y + "px";
+        }
+
+        Dot.prototype.draw = function () {
+            this.node = document.createElement("i");
+            this.node.style.backgroundColor = this.color;
+            this.node.style.width = this.size + "px";
+            this.node.style.height = this.size + "px";
+
+            this.update()
+            stage.appendChild(this.node);
+        }
+
+        Dot.prototype.check = function () {
+            var offsetWidth = stage.offsetWidth;
+            var offsetHeight = stage.offsetHeight;
+            var leftPz = this.x + this.size >= offsetWidth;
+            var rightPz = this.x <= 0;
+
+            var topPz = this.y < 0;
+            var bottomPz = this.y + this.size > offsetHeight;
+            if (leftPz || rightPz) {
+                this.xspeed = -this.xspeed;
+                // this.xspeed *= 0.2
+            }
+            if (topPz || bottomPz) {
+                this.yspeed = -this.yspeed;
+                this.yspeed *= 0.8
+            }
+            if (leftPz || rightPz || topPz || bottomPz) {
+                this.size -= 1;
+                if (this.size <= 0) {
+                    stage.removeChild(this.node)
+                    dots.splice(dots.indexOf(this), 1)
+                }
+                else {
+                    this.node.style.width = this.size + "px";
+                    this.node.style.height = this.size + "px";
+                }
+            }
+        };
+
+        Dot.prototype.move = function () {
+            this.yspeed += 0.1;
+            this.check();
+            this.x += this.xspeed;
+            this.y += this.yspeed;
+            this.update();
+        }
+
+        dots = [
+            new Dot("red", 20, 10, 10, 3, 1),
+            new Dot("green", 30, 20, 20, 4, 3)
+        ]
+        dots.forEach(function (dot) {
+            dot.draw();
+        });
+
+        setInterval(function () {
+            dots.forEach(function (dot) {
+                dot.move();
+            });
+        }, 30);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body{
+            background-color: lightblue;
+        }
+        .card{
+            display: flex;
+            
+        }
+        .hh {
+            display: flex;
+        }
+
+        .hh div {
+            display: flex;
+            flex-wrap: wrap;
+            width: 200px;
+            background-color: lightblue;
+        }
+
+        .hh div i {
+            width: 30%;
+            height: 100px;
+            outline: 1px solid red;
+            background-color: rebeccapurple;
+            transition: all .8s;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .hh div i.active {
+            opacity: 1;
+
+            transform: scale(1);
+        }
+
+        .mm {
+            display: flex;
+        }
+
+        .mm div {
+            display: flex;
+            flex-wrap: wrap;
+            width: 200px;
+            background-color: lightblue;
+        }
+
+        .mm div i {
+            width: 30%;
+            height: 100px;
+            outline: 1px solid red;
+
+            background-color: rebeccapurple;
+            transition: all .8s;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .mm div i.active {
+            opacity: 1;
+
+            transform: scale(1);
+        }
+
+        .ss {
+            display: flex;
+        }
+
+        .ss div {
+            display: flex;
+            flex-wrap: wrap;
+            width: 200px;
+            background-color: lightblue;
+            
+        }
+
+        .ss div i {
+            width: 30%;
+            height: 100px;
+            /* background-color: lightblue; */
+            outline: 1px solid red;
+
+            background-color: rebeccapurple;
+            transition: all .8s;
+            opacity: 0;
+            transform: scale(0.5);
+            
+        }
+
+        .ss div i.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="hh">
+            <div class="h1"></div>
+            <div class="h2"></div>
+        </div>
+        <div class="mm">
+            <div class="m1"></div>
+            <div class="m2"></div>
+        </div>
+        <div class="ss">
+            <div class="s1"></div>
+            <div class="s2"></div>
+        </div>
+    </div>
+
+    <script>
+        var nums = [
+            [
+                [1, 1, 1],
+                [1, 0, 1],
+                [1, 0, 1],
+                [1, 0, 1],
+                [1, 1, 1],
+            ],
+            [
+                [0, 0, 1],
+                [0, 0, 1],
+                [0, 0, 1],
+                [0, 0, 1],
+                [0, 0, 1],
+            ],
+            [
+                [1, 1, 1],
+                [0, 0, 1],
+                [1, 1, 1],
+                [1, 0, 0],
+                [1, 1, 1],
+            ],
+            [
+                [1, 1, 1],
+                [0, 0, 1],
+                [1, 1, 1],
+                [0, 0, 1],
+                [1, 1, 1],
+            ],
+            [
+                [1, 0, 1],
+                [1, 0, 1],
+                [1, 1, 1],
+                [0, 0, 1],
+                [0, 0, 1],
+            ],
+            [
+                [1, 1, 1],
+                [1, 0, 0],
+                [1, 1, 1],
+                [0, 0, 1],
+                [1, 1, 1],
+            ],
+            [
+                [1, 1, 1],
+                [1, 0, 0],
+                [1, 1, 1],
+                [1, 0, 1],
+                [1, 1, 1],
+            ],
+            [
+                [1, 1, 1],
+                [0, 0, 1],
+                [0, 0, 1],
+                [0, 0, 1],
+                [0, 0, 1],
+            ],
+            [
+                [1, 1, 1],
+                [1, 0, 1],
+                [1, 1, 1],
+                [1, 0, 1],
+                [1, 1, 1],
+            ],
+            [
+                [1, 1, 1],
+                [1, 0, 1],
+                [1, 1, 1],
+                [0, 0, 1],
+                [1, 1, 1],
+            ],
+        ]
+
+        // nums[0].forEach(function (row, rowi) {
+        //     row.forEach(function (element, i) {
+        //         var node = document.createElement("i");
+        //         if (element) {
+        //             node.classList.add("active");
+        //         }
+        //         document.querySelector(".s2").appendChild(node);
+        //     });
+        // });
+        // nums[0].forEach(function (row, rowi) {
+        //     row.forEach(function (element, i) {
+        //         var node = document.createElement("i");
+        //         if (element) {
+        //             node.classList.add("active");
+        //         }
+        //         document.querySelector(".s1").appendChild(node);
+        //     });
+        // });
+
+        function show(itm) {
+            nums[0].forEach(function (row, rowi) {
+                row.forEach(function (element, i) {
+                    var node = document.createElement("i");
+                    if (element) {
+                        node.classList.add("active");
+                    }
+                    itm.appendChild(node);
+                });
+            });
+        }
+
+        show(document.querySelector(".hh .h1"))
+        show(document.querySelector(".hh .h2"))
+        show(document.querySelector(".mm .m1"))
+        show(document.querySelector(".mm .m2"))
+        show(document.querySelector(".ss .s1"))
+        show(document.querySelector(".ss .s2"))
+
+        function shownum(itm, n) {
+            var node = itm.querySelectorAll("i");
+            console.log(node);
+            nums[n].forEach(function (row, rowi) {
+                row.forEach(function (element, a) {
+                    if (element) {
+                        node[3 * rowi + a].classList.add("active");
+                    } else {
+                        node[3 * rowi + a].classList.remove("active");
+                    }
+                });
+            });
+        }
+
+        setInterval(function () {
+            var now = new Date();
+            var hh = String(now.getHours()).padStart(2, "0");
+            var mm = String(now.getMinutes()).padStart(2, "0");
+            var ss = String(now.getSeconds()).padStart(2, "0");
+
+            var hhDom = document.querySelector(".hh");
+            var mmDom = document.querySelector(".mm");
+            var ssDom = document.querySelector(".ss");
+            hhDom.querySelectorAll("div").forEach(function (element, i) {
+                shownum(element, hh[i]);
+            });
+            mmDom.querySelectorAll("div").forEach(function (element, i) {
+                shownum(element, mm[i]);
+            });
+            ssDom.querySelectorAll("div").forEach(function (element, i) {
+                shownum(element, ss[i]);
+            });
+        }, 1000);
+
+    </script>
+</body>
+
+</html>

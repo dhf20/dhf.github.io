@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        .card {
+            /* background-color: red; */
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .list {
+            /* margin: 0 auto; */
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .bian {
+            transition: all 3s;
+
+        }
+
+        img {
+            width: 300px;
+            height: 200px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo {
+            display: flex;
+            list-style: none;
+            height: 100%;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .dots {
+            display: flex;
+            z-index: 9;
+            position: absolute;
+            width: 100%;
+            bottom: 10px;
+            justify-content: center;
+        }
+
+        .dots li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: orange;
+            margin: 0 10px;
+            list-style: none;
+            /* transition: all 2s; */
+            pointer-events: all;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bigbox">
+        <div class="card">
+            <div class="list"></div>
+            <div class="dots"></div>
+            <div class="logo">
+                <li class="right">
+                    < </li>
+                <li class="left"> > </li>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+    <script>
+        var imgs = ["./image/normal1.jpg", "./image/normal2.jpg", "./image/normal3.jpg", "./image/normal4.jpg"]
+        var number;
+        var bl = true;
+        for (let i = 0; i < imgs.length; i++) {
+            $(".dots").append('<li data-id=' + i + '></li>')
+        }
+
+        function dotmove(e) {
+            for (let i = 0; i < imgs.length; i++) {
+                if (i == e) {
+                    $("li")[i].style["background-color"] = "red"
+                } else {
+                    $("li")[i].style["background-color"] = "orange"
+                }
+            }
+        }
+
+        function imgget(n) {
+            $(".list").append('<img data-id=' + n + ' src=' + imgs[n] + '>')
+            dotmove(n)
+            return n
+        }
+
+        function imggetright(n) {
+            $(".list").prepend('<img data-id=' + n + ' src=' + imgs[n] + '>')
+            dotmove(n)
+            return n
+        }
+
+        number = imgget(0)
+        console.log("number", number);
+
+        function moveleft(a, ele) {
+            clearInterval(id)
+
+            imgget(a)
+            $(".list").addClass("bian")
+            $(".list").css({ "left": "-300px" })
+
+            $("li").css({
+                "pointer-events": "none",
+            })
+
+            setTimeout(function () {
+                $("li").siblings().css({
+                    "pointer-events": "all",
+                })
+
+                $(".list").removeClass("bian")
+                $("img")[0].remove()
+                $(".list").css({ "left": "0" })
+            }, 3000);
+            id = setInterval(fun1, 3500)
+
+            number = a
+        }
+
+        function moveright(a) {
+            clearInterval(id)
+
+            console.log("lial");
+            $(".list").css({ "left": "-300px" })
+            imggetright(a)
+            $("li").css({
+                "pointer-events": "none",
+            })
+
+            setTimeout(function () {
+                $("li").siblings().css({
+                    "pointer-events": "all",
+                })
+                $(".list").css({ "left": "0" })
+                $(".list").addClass("bian")
+                $("li").click = null;
+                setTimeout(function () {
+                    $(".list").removeClass("bian")
+                    $(".list").removeClass("right")
+                    $("img")[1].remove()
+                }, 3000);
+            }, 0);
+            id = setInterval(fun1, 3500)
+            number = a
+        }
+
+        $(".dots li").click(function () {
+            console.log($(this));
+            var imgid = $("img").data("id")
+            console.log("2", imgid);
+            console.log("3", $(this).data("id"));
+            $(this).css({ "background-color": "red" }).siblings().css({ "background-color": "orange" })
+            var _this = $(this)
+            if ($(this).data("id") != $("img").data("id")) {
+                if ($(this).data("id") > $("img").data("id")) {
+                    moveleft($(this).data("id"), _this)
+                }
+                else {
+                    moveright($(this).data("id"))
+                    console.log("xiaol");
+                }
+            }
+        })
+
+        $(".left").click(function () {
+            // console.log("left");
+            // console.log(number);
+            console.log(number);
+            number++
+            if (number == imgs.length) {
+                number = 0
+            }
+            moveleft(number)
+            // $()
+        })
+
+        $(".right").click(function () {
+            number--
+            if (number == -1) {
+                number = imgs.length - 1
+            }
+            moveright(number)
+        })
+
+        var fun1 = function () {
+            number++
+            if (number == imgs.length) {
+                number = 0
+            }
+            moveleft(number)
+            $("li").siblings().css({
+                "pointer-events": "none",
+            })
+        }
+
+        var id = setInterval(fun1, 3500)
+
+    </script>
+</body>
+
+</html>

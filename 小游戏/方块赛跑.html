@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .stage {
+            width: 500px;
+            height: 500px;
+            background-color: lightblue;
+            position: relative;
+        }
+
+        .stage .red {
+            width: 50px;
+            height: 20px;
+            background-color: red;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .stage .green {
+            width: 30px;
+            height: 10px;
+            background-color: green;
+
+            position: absolute;
+            top: 40px;
+            left: 20px;
+        }
+
+        .stage .blue {
+            width: 30px;
+            height: 10px;
+            background-color: blue;
+
+            position: absolute;
+            top: 60px;
+            left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stage">
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
+
+    <script>
+        function Make(ele,left,speed) {
+            this.ele = ele;
+            this.left = left;
+            this.speed = speed;
+        }
+
+        // Make.prototype.move = function () {
+        //     this.left += this.speed;
+        //     return  this.ele.style.left = this.left + "px";
+        // }
+
+        Make.prototype.re = function () {
+            var stageWidth = document.querySelector(".stage").offsetWidth;
+            this.left += this.speed;
+            
+            if (stageWidth - this.left <= this.ele.offsetWidth) {
+                this.speed = -this.speed;
+            }
+            if (this.left <= 0) {
+                this.speed = -this.speed;
+            }
+            this.ele.style.left = this.left + "px";
+            return this.ele.style.left;
+        }
+
+        setInterval(function () {
+            red.re();
+            green.re();
+            blue.re();
+        }, 100);
+
+        var readEl = document.querySelector(".red");
+        var red = new Make(readEl,0,5)
+
+        var greenEl = document.querySelector(".green");
+        var green = new Make(greenEl,20,5)
+
+        var blueEl = document.querySelector(".blue");
+        var blue = new Make(blueEl,20,10);
+    </script>
+
+</body>
+
+</html>

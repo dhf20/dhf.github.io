@@ -14,6 +14,7 @@
 <body>
     <section>
         <ul class="top"></ul>
+        <ul class="center"></ul>
         <ul class="bottom"></ul>
     </section>
 
@@ -47,10 +48,34 @@
                 img: "./img/同城静态页面.png"
             },
             {
+                id: 1,
+                htt: "./360/360.html",
+                text: "360静态页面",
+                img: "./img/360.png"
+            },
+            {
                 id: 2,
                 htt: "./九宫格抽奖/test.html",
                 text: "九宫格抽奖",
                 img: "./img/九宫格抽奖.gif"
+            },
+            {
+                id: 2,
+                htt: "./js放大镜/放大镜-test.html",
+                text: "放大镜",
+                img: "./img/js放大镜.png"
+            },
+            {
+                id: 2,
+                htt: "./js手风琴/手风琴.html",
+                text: "js手风琴",
+                img: "./img/js手风琴.png"
+            },
+            {
+                id: 2,
+                htt: "./js轮播图/轮播图练习2.html",
+                text: "js简易轮播图",
+                img: "./img/js简易轮播图.png"
             },
             {
                 id: 3,
@@ -63,6 +88,12 @@
                 htt: "./整形响应式页面/整形.html",
                 text: "整形响应式页面",
                 img: "./img/整形静态页面.png"
+            },
+            {
+                id: 4,
+                htt: "./jq无缝轮播图/无缝轮播图.html",
+                text: "无缝轮播图",
+                img: "./img/jq无缝轮播图.png"
             },
             {
                 id: 4,
@@ -92,10 +123,36 @@
         }).join("")}`)
 
         function qunbu() {
-            $(".bottom").append(`${numbers.map(function (ele) {
-                // console.log(ele);
-                return `
-            <li>
+            // $(".bottom").append(`${numbers.map(function (ele) {
+            //     console.log(ele);
+            //     return `
+            // <li>
+            //     <a href="${ele.htt}">
+            //     <div class="big">
+            //         <img src="${ele.img}">
+            //         <div class="mask">s
+            //             <h1>${ele.text}</h1>
+            //             </div>
+            //         </div>
+            //     </a>
+            //     <h3>${ele.text}</h3>
+            //     </li>
+            //     `
+            // }).join("")}`)
+            $(".top li").eq(0).addClass("active")
+
+            tops.slice(1, tops.length).map(function (index) {
+                // console.log(index);
+                $(".center").append(`
+                <h2>${index.text}</h2>
+                <div class="${index.id}">
+                    </div>
+                `)
+                numbers.map(function (ele) {
+                    // console.log(ele);
+                    if (index.id == ele.id) {
+                        $('.center .' + index.id).append(`
+                        <li>
                 <a href="${ele.htt}">
                 <div class="big">
                     <img src="${ele.img}">
@@ -103,27 +160,36 @@
                         <h1>${ele.text}</h1>
                         </div>
                     </div>
-                    
                 </a>
                 <h3>${ele.text}</h3>
                 </li>
-                `
-            }).join("")}`)
+                        `)
+                    }
+                })
+            })
+
+
         }
         qunbu()
 
         $(".top li").on("click", function () {
             $(".bottom").html(" ")
-            // console.log($(this).data("id"));
+            $(".center").html(" ")
+            console.log($(this).data("id"));
             var _this = $(this).data("id")
             if (_this == 0) {
                 qunbu()
+            }else{
+                $(".bottom").append(`
+                <h2>${tops[_this].text}</h2>
+                <div class="s"></div>
+                `)
             }
             numbers.map(function (ele) {
 
                 if (_this == ele.id) {
                     // console.log(ele);
-                    $(".bottom").append(`
+                    $(".bottom .s").append(`
                     <li>
                 <a href="${ele.htt}">
                 <div class="big">
@@ -132,7 +198,7 @@
                         <h1>${ele.text}</h1>
                         </div>
                     </div>
-                    
+
                 </a>
                 <h3>${ele.text}</h3>
                 </li>
@@ -141,12 +207,21 @@
             })
         })
 
+
+
+
         // $(".bottom li .big").mouseover(function () {
         //     console.log(this);
 
         //     // this.$(".mask").css({"background-color":"red"});
         //     $(".mask").css({"background-color":"red"});
         // })
+
+
+        $(".top li").click(function () {
+            // console.log($(this));
+            $(this).addClass("active").siblings().removeClass("active")
+        })
     </script>
 </body>
 

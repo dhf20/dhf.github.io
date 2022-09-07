@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bigbox {}
+
+        .bigbox .cark {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            /* margin: 0 auto; */
+        }
+
+        .bigbox .cark img {
+            width: 100%;
+            display: block;
+        }
+
+        .bigbox .cark .mask {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(0, 0, 255, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .bigbox .box {
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            background-image: url("./image/1.jpg");
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bigbox">
+        <div class="cark">
+            <img src="./image/1.jpg" alt="">
+            <div class="mask"></div>
+        </div>
+        <div class="box"></div>
+    </div>
+
+
+    <script>
+        var n = 3;
+        var carkEl = document.querySelector(".bigbox .cark");
+        console.log(carkEl);
+        var maskEl = document.querySelector(".bigbox .cark .mask");
+        var boxEl = document.querySelector(".bigbox .box");
+
+        boxEl.style["background-size"] = n * 100 + "%";
+
+        var carkWidth = carkEl.offsetWidth;
+        var carkHeight = carkEl.offsetHeight;
+        var carLeft = carkEl.offsetLeft;
+        console.log(carLeft);
+        var carTop = carkEl.offsetTop;
+
+        var maskWidth = carkWidth / n;
+        var maskHeight = carkHeight / n;
+
+        maskEl.style.width = maskWidth + "px";
+        maskEl.style.height = maskHeight + "px";
+
+        var boxWidth = boxEl.offsetWidth;
+        var boxHeight = boxEl.offsetHeight;
+
+        carkEl.onmousemove = function () {
+            // console.log(event.pageX-carkEl.offsetLeft,event.pageX-carkEl.offsetTop);
+
+            // 获取鼠标的位置
+            var mx = event.pageX - carLeft;
+            var my = event.pageY - carTop;
+
+            // 获取遮罩层的位置
+            var maskx = mx - maskWidth / 2;
+            var masky = my - maskHeight / 2;
+
+
+
+            if (maskx < 0) {
+                maskx = 0;
+            }
+            if (maskx > carkWidth - maskWidth) {
+                maskx = carkWidth - maskWidth
+            }
+            if (masky < 0) {
+                masky = 0;
+            }
+            if (masky > carkHeight - maskHeight) {
+                masky = carkHeight - maskHeight
+            }
+
+            maskEl.style.left = maskx + "px";
+            maskEl.style.top = masky + "px";
+
+            boxEl.style["background-position"] = -(boxWidth / maskWidth) * maskx + "px " + -(boxHeight / maskHeight) * masky + "px";
+
+        }
+    </script>
+
+</body>
+
+</html>
