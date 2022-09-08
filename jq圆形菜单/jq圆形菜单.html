@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .bigbox {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        .btn {
+            display: block;
+            z-index: 99;
+        }
+
+        .btn1 {
+            display: none;
+        }
+
+        .btn,
+        .btn1 {
+            width: 5rem;
+            height: 5rem;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 24px;
+            position: absolute;
+            top: calc(50% - 2.5rem);
+            left: calc(50% - 2.5rem);
+        }
+
+        .icon {
+            position: absolute;
+            top: calc(50% - 2.5rem);
+            left: calc(50% - 2.5rem);
+            display: none;
+        }
+
+        .icon div .d-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5rem;
+            height: 5rem;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 24px;
+        }
+
+        /* .icon .rooter1 {
+            transform: rotate(-22.5deg);
+        }
+
+        .rooter1 .d-btn {
+            transform: translateY(-10em) rotate(22.5deg);
+        }
+
+        .icon .rooter2 {
+            transform: rotate(22.5deg);
+        }
+
+        .rooter2 .d-btn {
+            transform: translateY(-10em) rotate(-22.5deg);
+        }
+
+        .icon .rooter3 {
+            transform: rotate(67.5deg);
+        }
+
+        .rooter3 .d-btn {
+            transform: translateY(-10em) rotate(-67.5deg);
+        }
+        .icon .rooter4 {
+            transform: rotate(112.5deg);
+        }
+
+        .rooter4 .d-btn {
+            transform: translateY(-10em) rotate(-112.5deg);
+        }
+        .icon .rooter5 {
+            transform: rotate(157.5deg);
+        }
+
+        .rooter5 .d-btn {
+            transform: translateY(-10em) rotate(-157.5deg);
+        }
+        .icon .rooter6 {
+            transform: rotate(202.5deg);
+        }
+
+        .rooter6 .d-btn {
+            transform: translateY(-10em) rotate(-202.5deg);
+        }
+        .icon .rooter7 {
+            transform: rotate(247.5deg);
+        }
+
+        .rooter7 .d-btn {
+            transform: translateY(-10em) rotate(-247.5deg);
+        }
+        .icon .rooter8 {
+            transform: rotate(292.5deg);
+        }
+
+        .rooter8 .d-btn {
+            transform: translateY(-10em) rotate(-292.5deg);
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="bigbox">
+        <div class="btn">
+            <i class="fa fa-align-justify" aria-hidden="true"></i>
+        </div>
+        <div class="btn1">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <div class="icon">
+            <div class="rooter1">
+                <div class="d-btn">
+                    <i class="fa fa-codepen" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="rooter2">
+                <div class="d-btn">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="rooter3">
+                <div class="d-btn">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="rooter4">
+                <div class="d-btn">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="rooter5">
+                <div class="d-btn">
+                    <i class="fa fa-dribbble" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="rooter6">
+                <div class="d-btn">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="rooter7">
+                <div class="d-btn">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="rooter8">
+                <div class="d-btn">
+                    <i class="fa fa-behance" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(".btn").click(function () {
+            console.log(1);
+            $(".btn").css({ "display": "none" })
+            $(".btn1").css({ "display": "block" })
+        })
+        // $(".btn1").click(function () {
+        //     $(".btn1").css({"display":"block"})
+        //     $(".btn").css({"display":"none"})
+        // })
+    </script>
+</body>
+
+</html>

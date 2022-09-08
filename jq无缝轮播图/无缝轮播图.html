@@ -148,7 +148,7 @@
         function moveright(a) {
             clearInterval(id)
 
-            console.log("lial");
+            // console.log("lial");
             $(".list").css({ "left": "-300px" })
             imggetright(a)
             $("li").css({
@@ -156,13 +156,13 @@
             })
 
             setTimeout(function () {
-                $("li").siblings().css({
-                    "pointer-events": "all",
-                })
                 $(".list").css({ "left": "0" })
                 $(".list").addClass("bian")
                 $("li").click = null;
                 setTimeout(function () {
+                    $("li").siblings().css({
+                        "pointer-events": "all",
+                    })
                     $(".list").removeClass("bian")
                     $(".list").removeClass("right")
                     $("img")[1].remove()
@@ -173,10 +173,10 @@
         }
 
         $(".dots li").click(function () {
-            console.log($(this));
+            // console.log($(this));
             var imgid = $("img").data("id")
-            console.log("2", imgid);
-            console.log("3", $(this).data("id"));
+            // console.log("2", imgid);
+            // console.log("3", $(this).data("id"));
             $(this).css({ "background-color": "red" }).siblings().css({ "background-color": "orange" })
             var _this = $(this)
             if ($(this).data("id") != $("img").data("id")) {
@@ -185,7 +185,7 @@
                 }
                 else {
                     moveright($(this).data("id"))
-                    console.log("xiaol");
+                    // console.log("xiaol");
                 }
             }
         })

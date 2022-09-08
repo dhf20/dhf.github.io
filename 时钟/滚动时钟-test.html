@@ -7,9 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .main{
-            display: flex;
+        body{
+            background-color: lightblue;
         }
+        .main {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+
         section {
             display: flex;
         }
@@ -40,7 +47,7 @@
             align-items: center;
             font-size: 60px;
             color: white;
-            
+
         }
     </style>
 </head>
@@ -75,7 +82,7 @@
 
 
     <script>
-        function showtime(element,n) {
+        function showtime(element, n) {
             var firstSpanDom = element.getElementsByTagName("span")[0];
             if (firstSpanDom.innerText !== n) {
                 var newspan = document.createElement("span");
@@ -84,7 +91,7 @@
 
                 firstSpanDom.style.marginTop = "-100px";
 
-                setTimeout(function(){
+                setTimeout(function () {
                     element.removeChild(firstSpanDom);
                 }, 300);
             }
@@ -105,14 +112,14 @@
             // console.log(ssDom);
             hhDom.querySelectorAll("div").forEach(function (ele, i) {
                 console.log(ele);
-                showtime(ele,hh[i]);
+                showtime(ele, hh[i]);
 
             });
             mmDom.querySelectorAll("div").forEach(function (ele, i) {
-                showtime(ele,mm[i]);
+                showtime(ele, mm[i]);
             });
             ssDom.querySelectorAll("div").forEach(function (ele, i) {
-                showtime(ele,ss[i]);
+                showtime(ele, ss[i]);
             });
         }, 1000);
 

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+    <style>
+        @keyframes xxx {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: -1000px;
+            }
+        }
+
+        .box {
+            margin: 0 auto;
+            width: 142.85px;
+            height: 177px;
+            background-color: lightblue;
+            background-image: url("./space-to-top.png");
+            background-repeat: no-repeat;
+
+            animation-name: xxx;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            /* animation-timing-function: linear; */
+            animation-timing-function: steps(7, end);
+        }
+    </style>
+
+    <div class="mos"></div>
+    <style>
+        @keyframes mos {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: -320px;
+            }
+        }
+
+        .mos {
+            margin: 0 auto;
+            width: 80px;
+            height: 96px;
+            background-image: url("./monster.png");
+            background-repeat: no-repeat;
+            /* background-position-y: -96px; */
+            /* background-position-y: -192px; */
+            background-position-y: -288px;
+
+            animation: mos 1s steps(4, end) 0s infinite;
+        }
+    </style>
+
+
+    <style>
+        @keyframes b1 {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: -3840px;
+            }
+        }
+
+        @keyframes b2 {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: -3840px;
+            }
+        }
+
+        @keyframes bear {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: -1600px;
+            }
+        }
+
+        .bigbox {
+            width: 480px;
+            height: 569px;
+            position: relative;
+            margin-top: -300px;
+
+        }
+
+        .b1 {
+            width: 480px;
+            height: 569px;
+            background-image: url(./b1.png);
+            position: absolute;
+            background-position: 0 0;
+            top: 0;
+            left: 0;
+            animation-name: b1;
+            animation-duration: 20s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear
+        }
+
+        .b2 {
+            width: 480px;
+            height: 336px;
+            background-image: url(./b2.png);
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 240px);
+            animation-name: b2;
+            animation-duration: 20s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear
+        }
+
+        .bear {
+            width: 200px;
+            height: 100px;
+            background-image: url(./bear.png);
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 100px);
+            animation-name: bear;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-timing-function: steps(8, end)
+        }
+    </style>
+
+    <div class="bigbox">
+        <div class="b1"></div>
+        <div class="b2"></div>
+        <div class="bear"></div>
+    </div>
+</body>
+
+</html>

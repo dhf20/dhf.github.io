@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            perspective: 500px;
+            background-color: #202020;
+
+        }
+
+        .bigbox {
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            background: linear-gradient(132deg, #1dbdff, #4cff6e, #fa057e, #fdfc47, #24fe41);
+            background-size: 600% 600%;
+            position: relative;
+            animation: an 5s ease infinite;
+        }
+
+        .card {
+            width: 315px;
+            height: 315px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: #202020;
+            top: calc(50% - 157.5px);
+            left: calc(50% - 157.5px);
+        }
+
+        .card h2 {
+            text-align: center;
+            margin-top: -20px;
+            padding-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .card h1 {
+            margin-top: -5px;
+            font-size: 5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            display: inline-block;
+
+        }
+
+        .word {
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        @keyframes an {
+            0% {
+                background-position: 0 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bigbox">
+        <div class="card">
+            <div class="word">
+                <div>
+                    <h2>LOADING</h2>
+                    <h1><span>1</span>%</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var s = 0
+        var a = 0
+        // setInterval(function () {
+        //     s += 1
+        //     if (s > 360) {
+        //         s = 0
+        //     }
+        //     $(".bigbox").css({
+        //         "background": "linear-gradient(" + s + "deg, #1dbdff, #4cff6e, #fa057e, #fdfc47, #24fe41)"
+        //     })
+        // }, 1);
+        setInterval(function () {
+            a += 1
+            if (a > 100) {
+                a = 0
+            }
+            $(".card span").text(a)
+        }, 60);
+
+    </script>
+</body>
+
+</html>

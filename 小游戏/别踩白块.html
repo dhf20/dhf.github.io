@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./less/minireset.css">
+    <style>
+        .stage {
+            width: 360px;
+            height: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            position: relative;
+            border: 1px solid black;
+        }
+
+        .stage .main {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stage .main i {
+            width: 90px;
+            height: 125px;
+            background-color: black;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .stage .main i.played {
+            width: 90px;
+            height: 125px;
+            /* background-color: red; */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .stage .num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(128, 128, 128, 0.521);
+            position: absolute;
+            top: 0;
+            left: calc(50% - 25px);
+            z-index: 10;
+        }
+
+        .stage .start {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(128, 128, 128, 0.326);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 18px;
+            color: #ffffff;
+
+        }
+
+        .stage .start .button {
+            width: 100px;
+            height: 50px;
+            background-color: lawngreen;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+        }
+
+        .stage .restart {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(128, 128, 128, 0.326);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            z-index: -99;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        .stage .restart div {
+            margin-bottom: 50px;
+        }
+
+        .stage .restart .rebutton {
+            width: 100px;
+            height: 50px;
+            background-color: lawngreen;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <div class="start">
+            <div class="first">别踩白块儿</div>
+            <div class="button">开始</div>
+        </div>
+        <div class="main"></div>
+        <div class="num"></div>
+        <div class="restart">
+            <div class="pzp">Game Over</div>
+            <div class="score"></div>
+            <div class="rebutton">重新开始</div>
+        </div>
+    </div>
+
+    <script>
+        var mainEl = document.querySelector(".stage .main")
+        var overEl = document.querySelector(".stage .over")
+        var numEl = document.querySelector(".stage .num")
+        var startEl = document.querySelector(".stage .start");
+        var buttonEl = document.querySelector(".stage .start .button");
+        var restartEl = document.querySelector(".stage .restart")
+        var rebuttonEl = restartEl.querySelector(".rebutton");
+        var scoreEl = restartEl.querySelector(".score")
+
+        var dots = [];
+        var score = 0;
+        var speed = 0.01;
+
+        function Dot(y) {
+            this.x = Math.floor(Math.random() * 4);
+            this.y = y;
+            this.node = document.createElement("i");
+            this.update();
+            mainEl.appendChild(this.node);
+            var _this = this;
+            this.node.onclick = function () {
+                var firstUnPlayed = dots.filter(function (dot) {
+                    return !dot.played;
+                })[0];
+                if (this.isSameNode(firstUnPlayed.node)) {
+                    this.classList.add("played");
+                    _this.played = true;
+                    event.stopPropagation();
+                    score++;
+                    numEl.innerHTML = score;
+                    if (score % 5 === 0) {
+                        speed += 0.01
+                    }
+                }
+
+            }
+        }
+
+        Dot.prototype.move = function () {
+            this.y += speed;
+        }
+
+        Dot.prototype.update = function () {
+            this.node.style.left = this.x * 90 + "px";
+            this.node.style.top = this.y * 125 + "px";
+        }
+
+        function init() {
+            for (let i = 2; i > 0; i--) {
+                var d = new Dot(i - 1)
+                dots.push(d);
+            }
+        }
+
+        buttonEl.onclick = function () {
+            init();
+            startEl.style.display = "none";
+            m();
+        }
+
+        rebuttonEl.onclick = function () {
+            dots.forEach(function (dot) {
+                mainEl.removeChild(dot.node)
+            });
+            dots.splice(0, dots.length)
+            restartEl.style.opacity = 0;
+            restartEl.style.zIndex = -10;
+            score = 0;
+            speed = 0.01;
+            numEl.innerHTML = "0";
+            init();
+            m();
+        }
+
+        function m() {
+            mainEl.onclick = function () {
+                clearInterval(id)
+                restartEl.style.opacity = 1;
+                restartEl.style.zIndex = 0;
+                scoreEl.innerHTML = score;
+            }
+
+            var id = setInterval(function () {
+                dots.forEach(function (dot) {
+                    dot.move();
+                    dot.update();
+                });
+                if (dots[dots.length - 1].y > -speed || dots[dots.length - 1].y == null) {
+                    var a = new Dot(-1);
+                    dots.push(a);
+                }
+                var firstPlayed = dots.filter(function (dot) {
+                    return dot.played
+                })[0];
+                if (firstPlayed) {
+                    mainEl.removeChild(mainEl.childNodes[dots.indexOf(firstPlayed)])
+                    dots.splice(dots.indexOf(firstPlayed), 1);
+                }
+                var firstUnPlayed = dots.filter(function (dot) {
+                    return !dot.played;
+                })[0];
+                if (firstUnPlayed && (firstUnPlayed.y + 1) * 125 >= 600) {
+                    clearInterval(id);
+                    restartEl.style.opacity = 1;
+                    restartEl.style.zIndex = 0;
+                    scoreEl.innerHTML = score;
+                }
+
+            }, 1);
+        }
+
+    </script>
+</body>
+
+</html>

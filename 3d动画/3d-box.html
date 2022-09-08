@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="front"></div>
+        <div class="back"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </div>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            perspective: 500px;
+            background-image: url(./R-C.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            /* background-color: rgba(127, 127, 127, 0.319); */
+            position: relative;
+
+            transform-style: preserve-3d;
+
+
+
+        }
+
+        .box>div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: all .5s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .box .front {
+            background-image: url(./1.jpg);
+            background-color: rgba(173, 216, 230);
+            transform: translateZ(100px);
+
+        }
+
+        .box .back {
+            background-image: url(./2.jpg);
+            background-color: rgba(240, 128, 128);
+            transform: rotateY(180deg) translateZ(100px);
+        }
+
+        .box .left {
+            background-image: url(./3.jpg);
+            background-color: rgba(144, 238, 144);
+            transform: rotateY(-90deg) translateZ(100px)
+        }
+
+        .box .right {
+            background-image: url(./4.jpg);
+            background-color: rgba(255, 255, 224);
+            transform: rotateY(90deg) translateZ(100px);
+        }
+
+        .box .top {
+            background-image: url(./5.jpg);
+            background-color: rgba(255, 182, 193);
+            transform: rotateX(90deg) translateZ(-100px);
+        }
+
+        .box .bottom {
+            background-image: url(./6.jpg);
+            background-color: rgba(255, 0, 0);
+            transform: rotateX(90deg) translateZ(100px);
+        }
+    </style>
+
+    <script>
+        var s = 0
+        var current = 0
+        var numbers = {
+            a: 1,
+            b: 1,
+            c: 0,
+        }
+        setInterval(function () {
+            s += 1;
+            if (s > 720) {
+                s = 0
+                numbers.a = parseInt(Math.random() * 2)
+                numbers.b = parseInt(Math.random() * 2)
+                numbers.c = parseInt(Math.random() * 2)
+                if (numbers.b == numbers.c && numbers.b == numbers.a) {
+                    if (numbers.b == 1) {
+                        numbers.b = 0
+                    }
+                    if (numbers.b == 0) {
+                        numbers.b = 1
+                        numbers.c = 1
+                    }
+                }
+
+                $(".front").css({ "transform": "translateZ(" + 100 + "px)" })
+                $(".back").css({ "transform": "rotateY(180deg) translateZ(" + 100 + "px)" })
+                $(".left").css({ "transform": "rotateY(-90deg) translateZ(" + 100 + "px)" })
+                $(".right").css({ "transform": "rotateY(90deg) translateZ(" + 100 + "px)" })
+                $(".bottom").css({ "transform": "rotateX(90deg) translateZ(" + 100 + "px)" })
+                $(".top").css({ "transform": "rotateX(90deg) translateZ(" + (-100) + "px)" })
+
+
+            }
+            $(".box").css({
+                // "transform": "rotate3d(" + parseInt(Math.random() * 2) + "," + parseInt(Math.random() * 2) + "," + parseInt(Math.random() * 2) + "," + s + "deg)"
+                "transform": "rotate3d(" + numbers.a + "," + numbers.b + "," + numbers.c + "," + s + "deg)"
+                // "transform": "rotate3d(" + a + "," + b + "," + c + "," + s + "deg)"
+            })
+            if (s > 360) {
+                $(".front").css({ "transform": "translateZ(" + 150 + "px)" })
+                $(".back").css({ "transform": "rotateY(180deg) translateZ(" + 150 + "px)" })
+                $(".left").css({ "transform": "rotateY(-90deg) translateZ(" + 150 + "px)" })
+                $(".right").css({ "transform": "rotateY(90deg) translateZ(" + 150 + "px)" })
+                $(".bottom").css({ "transform": "rotateX(90deg) translateZ(" + 150 + "px)" })
+                $(".top").css({ "transform": "rotateX(90deg) translateZ(" + (-150) + "px)" })
+            }
+        }, 10);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .bigbox {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+
+        .warpper {
+            background: #eef3f7;
+            width: 410px;
+            min-height: 480px;
+            box-shadow: 0px 15px 35px -5px rgb(50 88 130 / 32%);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .top {
+
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            z-index: 4;
+
+        }
+
+        .left {
+            width: 300px;
+            height: 300px;
+            margin-left: -70px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            border-radius: 15px;
+            z-index: 1;
+
+        }
+
+        .right {
+            flex: 1;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            /* background-color: red; */
+        }
+
+        .play,
+        .pause {
+            margin-bottom: 0;
+            font-size: 95px;
+            color: #fff;
+            width: auto;
+            height: auto;
+        }
+
+        .xiaoshi {
+            display: none;
+        }
+
+        .heart,
+        .cun,
+        .pre-left,
+        .pre-right {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            padding: 5px;
+            margin-bottom: 10px;
+            color: #acb8cc;
+            width: 50px;
+            height: 50px;
+        }
+
+        .active {
+            color: purple;
+            border-radius: 50%;
+            background-color: white;
+            transition: all .4s
+        }
+
+
+        .img {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            /* transform: scale(); */
+            /* transition: all 3s; */
+            /* background-image: url(); */
+        }
+
+        .bian {
+            transform: scale(1.2);
+            opacity: 0;
+            transition: all 1s;
+        }
+
+        .xiao {
+            opacity: 1;
+            transition: all 1s;
+        }
+
+        .bian1 {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 1s;
+        }
+
+        .xiao1 {
+            opacity: 1;
+            transition: all 1s;
+        }
+
+        .bottom {
+            width: 100%;
+            margin-top: -15px;
+        }
+
+        .bottom-top {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .word-one {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            line-height: 1.3em;
+        }
+
+        .word-two {
+            font-weight: 400;
+            font-size: 20px;
+            opacity: 0.7;
+            line-height: 1.3em;
+            min-height: 52px;
+        }
+
+        label {
+            position: relative;
+            height: 10px;
+            display: block;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        input {
+            width: 300px;
+            height: 100%;
+            margin: 0;
+            opacity: 0;
+            display: block;
+            z-index: 12;
+        }
+
+        .jindu {
+            width: 300px;
+            height: 100%;
+            background-color: lightblue;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .jindu .mask {
+            width: 0%;
+            height: 100%;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bigbox">
+        <div class="warpper">
+            <div class="top">
+                <div class="left">
+                    <!-- <div class="img" style="background-image: url();"></div> -->
+                    <!-- <video width="300" height="300" src="https://www.runoob.com/try/demo_source/movie.mp4" controls loop
+                        muted preload="none" poster="https://www.runoob.com/images/compatible_chrome.gif"></video> -->
+                    <!-- <img src="./1.jpg" alt=""> -->
+                    <!-- <audio src="./2.mp3"></audio> -->
+                </div>
+                <div class="right">
+                    <i class="fa fa-heart heart one"></i>
+                    <i class="fa fa-external-link cun one"></i>
+                    <i class="fa fa-arrow-left pre-left one"></i>
+                    <i class="fa fa-arrow-right pre-right one"></i>
+                    <i class="fa fa-play-circle-o play"></i>
+                    <i class="fa fa-pause-circle-o pause xiaoshi "></i>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="bottom-top">
+                    <!-- <div class="word-one">123</div>
+                    <div class="word-two">456</div> -->
+
+                </div>
+                <label>
+                    <input type="range" name="progress" min="0" value="0" max="100" step="0.01" />
+                    <div class="jindu">
+                        <div class="mask"></div>
+                    </div>
+                </label>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var video = document.querySelector("video");
+
+
+        var progress = document.querySelector("input[name=progress]");
+        var mask = document.querySelector(".mask");
+
+
+        // var audio = document.querySelector("audio");
+
+
+        var imgs = ["./1.jpg", "./2.jpg", "./3.jpg"]
+        var audios = ["./1.mp3", "./2.mp3", "./3.mp3"]
+        var words = [{ "one": "Norm Ender", "two": "Mekanın Sahibi" }, { "one": "Grandson", "two": "Overdose" }, { "one": "Moby", "two": "Extreme Ways" }]
+
+        function imgget(n) {
+            // $(".left").append("<img data-id=" + n + " src=" + imgs[n] + ">")
+            $(".left").append('<div class="img" data-id=' + n + ' style="background-image:url(' + imgs[n] + ')"></div>')
+            $(".left").append("<audio src=" + audios[n] + "></audio>")
+            $(".bottom-top").append('<div class="word-one">' + words[n].one + '</div>')
+            $(".bottom-top").append('<div class="word-two">' + words[n].two + '</div>')
+        }
+        imgget(0)
+
+        var audio = document.querySelector("audio");
+
+        $(".play").click(function () {
+            $("audio")[0].play();
+
+            $(".play").addClass("xiaoshi")
+            $(".pause").removeClass("xiaoshi")
+        })
+        $(".pause").click(function () {
+            $("audio")[0].play();
+
+            $(".pause").addClass("xiaoshi")
+            $(".play").removeClass("xiaoshi")
+        })
+
+        $(".one").mouseover(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+        $(".one").mouseleave(function () {
+            $(".one").removeClass("active");
+        })
+
+
+        $(".pre-left").click(function () {
+            var id = $(".left .img").data("id");
+            console.log("left");
+            mask.style.width = 0 + "%"
+
+            console.log($(".left .img").data("id"));
+            console.log($(".left .img").data("id") - 1);
+            // if ($(".left img").data("id") === 0) {
+            //     $(".left").html(" ")
+            //     imgget(imgs.length - 1)
+            // } else {
+            //     $(".left").html(" ")
+            //     imgget($(".left img").data("id") - 1)
+            // }
+
+            if (id == 0) {
+                $("audio")[0].play();
+                $(".img").addClass("bian")
+
+                setTimeout(function () {
+                    $(".left").html(" ")
+                    $(".bottom-top").html(" ")
+                    imgget(imgs.length - 1)
+                    $(".img").addClass("xiao")
+                }, 300);
+
+            } else {
+                $("audio")[0].play();
+                $(".img").addClass("bian")
+
+                setTimeout(function () {
+                    $(".left").html(" ")
+                    $(".bottom-top").html(" ")
+                    imgget(id - 1)
+                    $(".img").addClass("xiao")
+                }, 300);
+
+            }
+            // if (id - 1 < 0) {
+            //     $(".left").html(" ")
+            //     id = 2;
+            //     imgget(id)
+            // } else {
+            //     $(".left").html(" ")
+            //     imgget(id - 1)
+            // }
+
+            $(".pause").addClass("xiaoshi")
+            $(".play").removeClass("xiaoshi")
+        })
+
+
+        $(".pre-right").click(function () {
+            console.log("right");
+            mask.style.width = 0 + "%"
+            var id = $(".left .img").data("id");
+            // console.log($("img"));
+
+            if (id == imgs.length - 1) {
+                $("audio")[0].pause();
+                $(".img").addClass("bian1")
+
+                setTimeout(function () {
+                    $(".left").html(" ")
+                    $(".bottom-top").html(" ")
+
+                    imgget(0)
+                    $(".img").addClass("xiao1")
+                }, 300);
+            } else {
+                $("audio")[0].pause();
+                $(".img").addClass("bian1")
+                setTimeout(function () {
+                    $(".left").html(" ")
+                    $(".bottom-top").html(" ")
+
+                    imgget(id + 1)
+                    $(".img").addClass("xiao1")
+                }, 300);
+            }
+
+            $(".pause").addClass("xiaoshi")
+            $(".play").removeClass("xiaoshi")
+        })
+
+        
+        progress.oninput = function () {
+            // console.log(this.value);
+            mask.style.width = this.value + "%";
+            audio.currentTime = (this.value * audio.duration) / 100;
+        };
+
+        audio.ontimeupdate = function () {
+            mask.style.width = (this.currentTime / this.duration) * 100 + "%";
+        };
+
+    </script>
+</body>
+
+</html>
